@@ -6,18 +6,21 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Pics {
+public class User extends BaseEntity {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long ipics;
+    private Long iuser;
 
     @NotNull
-    @ManyToOne
-    @JoinColumn(name = "ipost")
-    private Posts posts;
+    @Column
+    private String uid;
 
     @NotNull
-    @Column(length = 2100)
-    private String pic;
+    @Column
+    private String upw;
+
+    @NotNull
+    @Column
+    private String nickname;
 }
