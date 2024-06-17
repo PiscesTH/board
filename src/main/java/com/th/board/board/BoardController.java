@@ -21,8 +21,8 @@ public class BoardController {
     private final BoardService service;
 
     @PostMapping
-    public ApiResponse<ResVo> postBoard(@RequestPart(name = "pics") List<MultipartFile> pics,
+    public ApiResponse<ResVo> postBoard(@RequestPart(required = false) List<MultipartFile> pics,
                                         @RequestPart PostsDto dto) {
-        return null;
+        return service.postBoard(pics, dto);
     }
 }

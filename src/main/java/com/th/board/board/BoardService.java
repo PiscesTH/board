@@ -1,6 +1,10 @@
 package com.th.board.board;
 
+import com.th.board.board.model.PostPicsProcDto;
 import com.th.board.board.model.PostsDto;
+import com.th.board.common.MyFileUtils;
+import com.th.board.entity.Pics;
+import com.th.board.entity.Posts;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,9 +20,22 @@ import java.util.List;
 public class BoardService {
     private final BoardRepository boardRepository;
     private final PicsRepository picsRepository;
+    private final MyFileUtils fileUtils;
 
     public ApiResponse<ResVo> postBoard(List<MultipartFile> pics, PostsDto dto) {
+        Posts post = new Posts();
+        post.setTitle(dto.getTitle());
+        post.setContents(dto.getContents());
+        boardRepository.save(post);
 
-        return null;
+        String target = "/post/" + post.getIpost();
+        for (MultipartFile pic : pics) {
+            String saveFileNm = fileUtils.transferTo(pic, target);
+            Pics entity = new Pics();
+            entity.setPosts(post);
+            entity.setPic(saveFileNm);
+            picsRepository.save(entity);
+        }
+        return new ApiResponse<>(new ResVo(1));
     }
 }
