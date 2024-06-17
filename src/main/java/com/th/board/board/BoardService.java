@@ -23,6 +23,14 @@ public class BoardService {
     private final MyFileUtils fileUtils;
 
     public ApiResponse<ResVo> postBoard(List<MultipartFile> pics, PostsDto dto) {
+        if (pics == null || pics.isEmpty()) {
+                return new ApiResponse<>(new ResVo());
+        }
+        for (MultipartFile pic : pics) {
+            if (!pic.getContentType().startsWith("image")){
+                return new ApiResponse<>(new ResVo());
+            }
+        }
         Posts post = new Posts();
         post.setTitle(dto.getTitle());
         post.setContents(dto.getContents());

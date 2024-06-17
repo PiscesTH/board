@@ -12,10 +12,10 @@ public class Posts extends BaseEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ipost;
 
-    @NotNull
-    @ManyToOne
-    @JoinColumn(name = "iuser")
-    private User user;
+//    @NotNull
+//    @ManyToOne
+//    @JoinColumn(name = "iuser")
+//    private User user;
 
     @NotNull
     @Column(length = 100)
