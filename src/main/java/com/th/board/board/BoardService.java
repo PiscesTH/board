@@ -26,11 +26,14 @@ public class BoardService {
         if (pics == null || pics.isEmpty()) {
                 return new ApiResponse<>(new ResVo());
         }
+        log.info("1 -----------------");
         for (MultipartFile pic : pics) {
+            log.info("{}", pic.getContentType());
             if (!pic.getContentType().startsWith("image")){
                 return new ApiResponse<>(new ResVo());
             }
         }
+        log.info("2 -----------------");
         Posts post = new Posts();
         post.setTitle(dto.getTitle());
         post.setContents(dto.getContents());

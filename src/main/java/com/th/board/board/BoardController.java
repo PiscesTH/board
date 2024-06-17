@@ -23,6 +23,8 @@ public class BoardController {
     @PostMapping
     public ApiResponse<ResVo> postBoard(@RequestPart(required = false) List<MultipartFile> pics,
                                         @RequestPart PostsDto dto) {
+        log.info("pics : {}", pics);
+        log.info("dto : {}", dto);
         return service.postBoard(pics, dto);
     }
 }
