@@ -25,7 +25,7 @@ public class Posts extends BaseEntity{
     @Column(length = 500)
     private String contents;
 
-    @NotNull
+//    @NotNull
     @Column(length = 2100)
     private String thumbNail;
 }
