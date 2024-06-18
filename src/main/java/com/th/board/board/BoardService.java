@@ -54,6 +54,7 @@ public class BoardService {
             entity.setPic(saveFileNm);
             picsRepository.save(entity);
 
+
             //썸네일 작업
 
             String savedFilePath = downloadPath + target + "/" + saveFileNm;
