@@ -61,11 +61,11 @@ public class BoardService {
             log.info(savedFilePath);
             log.info(saveThumbnailPath);
 
-//            try {
-//            Thumbnailator.createThumbnail(new File(savedFilePath), new File(saveThumbnailPath), 250, 250);
-//            } catch (Exception e) {
-//                return null;
-//            }
+            try {
+            Thumbnailator.createThumbnail(new File(savedFilePath), new File(saveThumbnailPath), 250, 250);
+            } catch (Exception e) {
+                return null;
+            }
 
             //썸네일(비율)
             File savedFile = new File(savedFilePath);
