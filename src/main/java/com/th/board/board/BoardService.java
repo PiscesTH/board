@@ -55,18 +55,29 @@ public class BoardService {
             picsRepository.save(entity);
 
 
-            //썸네일 작업
-
+            //썸네일 작업(크기 고정)
             String savedFilePath = downloadPath + target + "/" + saveFileNm;
             String saveThumbnailPath = downloadPath + target + "/s_" + saveFileNm;
             log.info(savedFilePath);
             log.info(saveThumbnailPath);
+
+//            try {
+//            Thumbnailator.createThumbnail(new File(savedFilePath), new File(saveThumbnailPath), 250, 250);
+//            } catch (Exception e) {
+//                return null;
+//            }
+
+            //썸네일(비율)
+            File savedFile = new File(savedFilePath);
             try {
-            Thumbnailator.createThumbnail(new File(savedFilePath), new File(saveThumbnailPath), 250, 250);
+            BufferedImage bo_image = ImageIO.read(savedFile);
+            double ratio = 3;
+            int width = bo_image.getWidth() > 1000 ? (int) (bo_image.getWidth() / ratio) : bo_image.getWidth();
+            int height = bo_image.getHeight() > 1000 ? (int) (bo_image.getHeight() / ratio) : bo_image.getHeight();
+            Thumbnailator.createThumbnail(savedFile, new File(saveThumbnailPath), width, height);
             } catch (Exception e) {
                 return null;
             }
-
         }
         return new ApiResponse<>(new ResVo(1));
     }
